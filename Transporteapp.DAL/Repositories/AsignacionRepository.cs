@@ -131,6 +131,54 @@ namespace TransporteApp.DAL.Repositories
 
             return dt;
         }
+
+        public void Finalizar(int idAsignacion)
+        {
+            var db = new DbConnection();
+
+            using (SqlConnection conn = db.GetConnection())
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(
+                    "sp_FinalizarAsignacion",
+                    conn
+                );
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue(
+                    "@IdAsignacion",
+                    idAsignacion
+                );
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void Eliminar(int idAsignacion)
+        {
+            var db = new DbConnection();
+
+            using (SqlConnection conn = db.GetConnection())
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(
+                    "sp_EliminarAsignacion",
+                    conn
+                );
+
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue(
+                    "@IdAsignacion",
+                    idAsignacion
+                );
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 
 
